@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import Card from "./components/Card";
 import Searchbox from "./components/Searchbox";
-
-import "./index.css";
 import ErrorBoundry from "./components/ErrorBoundry";
+import "./index.css";
 
-export default function App() {
-  const [robots, setRobots] = useState([]);
-  const [search, setSearch] = useState("");
+import { setSearch } from "./actions";
 
-  const onSearchChange = (event) => {
-    setSearch(event.target.value);
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchField,
   };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearch(event.target.value)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(function App(props) {
+  const [robots, setRobots] = useState([]);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -20,12 +32,12 @@ export default function App() {
   }, []);
 
   const filteredRobots = robots.filter((robot) => {
-    return robot.name.toLowerCase().includes(search.toLowerCase());
+    return robot.name.toLowerCase().includes(props.searchField.toLowerCase());
   });
 
   return (
     <div className="container">
-      <Searchbox searchChange={onSearchChange} />
+      <Searchbox searchChange={props.onSearchChange} />
       <ErrorBoundry>
         {filteredRobots.map((robot) => {
           return (
@@ -40,4 +52,4 @@ export default function App() {
       </ErrorBoundry>
     </div>
   );
-}
+});
