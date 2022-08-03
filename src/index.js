@@ -9,6 +9,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import "tachyons";
 import { searchRobots, requestRobots } from "./reducers";
+import * as serviceWorker from "./service-worker";
 
 const logger = createLogger();
 const rootReducer = combineReducers({ searchRobots, requestRobots });
@@ -25,3 +26,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+serviceWorker.register();
