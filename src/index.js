@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import "tachyons";
 import { searchRobots, requestRobots } from "./reducers";
-import * as serviceWorker from "./service-worker";
+import * as serviceWorker from "./serviceWorkerRegistration";
 
 const logger = createLogger();
 const rootReducer = combineReducers({ searchRobots, requestRobots });

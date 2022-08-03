@@ -8,7 +8,7 @@ class Card extends Component {
       <div className="Card">
         <img
           alt={this.props.username}
-          src={`https://robohash.org/${this.props.username}?200*200`}
+          src={`https://robohash.org/${this.props.username}?size=200*200`}
         />
         <div>
           <h2>{this.props.name}</h2>
