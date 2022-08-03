@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Card from "./components/Card";
 import Searchbox from "./components/Searchbox";
 import ErrorBoundry from "./components/ErrorBoundry";
+import Button from "./components/Button";
 import "./index.css";
 
 import { setSearch, requestRobots } from "./actions";
@@ -38,6 +39,7 @@ export default connect(
   return (
     <div className="container">
       <Searchbox searchChange={onSearchChange} />
+      <Button />
       <ErrorBoundry>
         {filteredRobots.map((robot) => {
           return (
